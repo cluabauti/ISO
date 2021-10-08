@@ -1,0 +1,20 @@
+#!/bin/bash
+#Si el parametro es 1, imprime A B
+#Si el parametro es 2, imprime C D
+#Si el parametro no es ni 1 ni 2 imprime un mensaje informando
+
+if [ $# -eq 1 ]; then #comprueba si se recibe solo un parámetro
+	if [ #1 -eq 1 ]; then
+		echo "A"
+		echo "B"
+	else
+		if [ #1 -eq 2 ] ; then
+			echo "C"
+			echo "D"
+		else
+			echo "El unico parámetro de entrada debe ser 1 ó 2"
+		fi #fin del #1 -eq 2
+	fi #fin del #1 -eq 1
+else 
+	echo "Se debe recibir unicamente un parámetro"
+fi #fin $# -eq 1
