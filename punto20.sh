@@ -10,7 +10,7 @@ length(){
 }
 
 pop(){
-	largo=${PILA[@]}
+	largo=$(($(length) - 1))
 	unset PILA[$largo]
 	PILA=( ${PILA[@]} )
 }
@@ -35,7 +35,7 @@ done
 #saco 3 elementos
 echo POP
 for i in $(seq 3); do
-	$(pop )
+	pop 
 done
 
 echo "LARGO fin="
