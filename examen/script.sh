@@ -1,21 +1,22 @@
 #!/bin/bash
-pwd
 
 arregloI=()
 arregloD=()
 
-for i in $(cat history.log | grep Commandline); do
-    if [ $i == "Commandline: apt-get install *" ]; then
-        arregloI=("${arregloI[@]}" $(echo $i | cut -d" " -f4))
-    elif [ $i == "Commandline: apt remove *" ]; then 
-        arregloD=("${arregloD[@]}"  $(echo $i | cut -d" " -f4))    
-    fi
-done
+#recorro linea por linea y pregunto si es igual a apt-get install o a apt remove, 
+#luego agrego al arreglo segun corresponda
+while separador= read -r line
+do
+	if [[ "$line" == *"apt-get install"* ]]; then
+       arregloI=("${arregloI[@]}" $(echo "$line" | cut -d" " -f4))
+    elif [[ "$line" == *"apt remove"* ]]; then 
+        arregloD=("${arregloD[@]}"  $(echo "$line" | cut -d " " -f4))    
+	fi
+done < history.log
 
-echo "Paquetes instalados (total ${arregloI[@]})"
+echo "Paquetes instalados (total ${#arregloI[@]})"
 echo ${arregloI[@]}
 
-echo "Paquetes desinstalados (total ${arregloD[@]})"
+echo "Paquetes desinstalados (total ${#arregloD[@]})"
 echo ${arregloD[@]}
 
-read
